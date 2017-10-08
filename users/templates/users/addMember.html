@@ -2,13 +2,13 @@
     <head>
 
         {% load staticfiles %}
-        <title>Plant-o-Meter</title>
+        <title>DILUTE</title>
         <script src="https://use.fontawesome.com/a2c08f3da1.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-        <link rel="shortcut icon" href="{% static 'users/img/logo-image.png' %}">
+        <link rel="shortcut icon" href="{% static 'users/img/logo-image.jpg' %}">
     </head>
-    <body style="background-image: url({% static 'users/img/bg/bg-10.jpg' %});">
+    <body style="background-image: url({% static 'users/img/bg/main1.jpg' %});">
         <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01">
                 <span class="navbar-toggler-icon"></span>
@@ -39,6 +39,7 @@
             <div class="form">
                 <center>
                     <form name="myform1" role="form" action="{% url 'users:addMember' %}" method="post" class="register-form">
+                    <img src="{% static 'users/img/logo-image.jpg' %}" alt="" height="150px" width="150px" />
                         <!-- <img src="{% static 'users/img/logo-image.png' %}" alt="" height="150" width="150" /> -->
                         {% csrf_token %}
                         <input type="text" name="membername" placeholder="MEMBER NAME"><br><br>

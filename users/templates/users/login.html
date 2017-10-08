@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">{% load staticfiles %}
   <title>Login/SignUp</title>
-  <link rel="shortcut icon" href="{% static 'users/img/logo-image.png' %}">
+  <link rel="shortcut icon" href="{% static 'users/img/logo-image.jpg' %}">
 </head>
-<body><center>
+<body style="background-image: url({% static 'users/img/bg/main1.jpg' %})" ><center>
 <div class="login-page center">
   <div class="form">
+  <img src="{% static 'users/img/logo-image.jpg' %}" alt="" height="150px" width="150px" />
    <form name="myform1" role="form" action="{% url 'users:loginpage' %}" method="post" class="register-form" onsubmit="return validateform1()">
       {% csrf_token %}
           <input type="text" name="name" placeholder="NAME"><br><br>
@@ -107,7 +108,7 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: blue;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -171,14 +172,14 @@
     padding: 3cm;
 }
 body {
-  background: #76b852;
+  /*background:  #7FFFD4;*
   background: -webkit-linear-gradient(right, #76b852, #8DC26F);
   background: -moz-linear-gradient(right, #76b852, #8DC26F);
   background: -o-linear-gradient(right, #76b852, #8DC26F);
   background: linear-gradient(to left, #76b852, #8DC26F);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -moz-osx-font-smoothing: grayscale; */     
 }
 </style>
 </html>

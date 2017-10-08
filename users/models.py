@@ -10,8 +10,11 @@ class Users(models.Model):
 	phone = models.CharField(max_length = 15, unique=True)
 	address = models.CharField(max_length=150)
 	currentplant = models.CharField(max_length = 50, null = True)
+	currentreservoir = models.IntegerField(default = 0)
+	plantcount = models.IntegerField(default = 0)
 	vehicleCount = models.IntegerField(default = 0)
 	membercount = models.IntegerField(default = 0)
+	reservoircount = models.IntegerField(default = 0)
 
 	def get_absolute_url(self):
 		return reverse('users:login')

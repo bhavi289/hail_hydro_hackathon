@@ -18,5 +18,6 @@ urlpatterns = [
 	url(r'^addplant/$', views.addplant, name='addplant'),
 	url(r'^addvehicle/$', views.addVehicle, name='addVehicle'),
 	url(r'^addmember/$', views.addMember, name='addMember'),
+	url(r'^addReservoir/$', views.addReservoir, name='addReservoir'),
 	url(r'^api/login/$', views.mobile_login, name='mobile_login'),
 ]

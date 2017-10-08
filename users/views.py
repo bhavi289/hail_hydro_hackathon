@@ -8,6 +8,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.auth.decorators import login_required
 from django.conf.urls import url, include
 from .models import Users, Plants, Vehicles, Members
+from sensors.models import reservoir, reservoirdata
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
@@ -51,28 +52,45 @@ def addplant(request):
 		global userid
 		uid = userid
 		z = get_object_or_404(Users, pk=userid)
-		print("hello")
 		f = Plants.objects.filter(userid = z)
+		z.plantcount += 1
 		if f:
 			p = Plants(userid = z, plantName = request.POST['plantname'])
 			p.save()
-			print("not")
 		else:
 			p = Plants(userid = z, plantName = request.POST['plantname'])
 			p.save()
 			z.currentplant = p.id
 			z.save()
-			print("now")
 		z = Plants.objects.filter(userid = userid)
-		print(z)
 		return redirect('../../sensors/data')
 	return render(request, 'users/addplant.html')
+
+def addReservoir(request):
+	r = False
+	if request.POST:
+		global userid
+		uid = userid
+		z = get_object_or_404(Users, pk=userid)
+		f = reservoir.objects.filter(userid = z)
+		z.reservoircount += 1
+		z.save()
+		if f:
+			p = reservoir(userid = z, reservoirname = request.POST['reservoirname'])
+			p.save()
+		else:
+			p = reservoir(userid = z, reservoirname = request.POST['reservoirname'])
+			p.save()
+			z.currentreservoir = p.id
+			z.save()
+		z = reservoir.objects.filter(userid = userid)
+		return redirect('../../sensors/data')
+	return render(request, 'users/addReservoir.html')
 
 def addVehicle(request):
 	if request.POST:
 		global userid
 		z = get_object_or_404(Users, pk=userid)
-		print("hello")
 		v = Vehicles(userid = z, vehicle = request.POST['vehiclename'])
 		v.save()
 		z.vehicleCount += 1
@@ -84,7 +102,6 @@ def addMember(request):
 	if request.POST:
 		global userid
 		z = get_object_or_404(Users, pk=userid)
-		print("hello")
 		v = Members(userid = z, memberName = request.POST['membername'])
 		v.save()
 		z.membercount += 1
