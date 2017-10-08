@@ -1,0 +1,304 @@
+<html>
+    <head>
+        {% load staticfiles %}
+        <title>Hail Hydra</title>
+        <link rel="shortcut icon" href="{% static 'users/img/logo-image.png' %}">
+        <script src="https://use.fontawesome.com/a2c08f3da1.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    </head>
+    <body> 
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link " href="#">Home </a>
+                    </li>
+                </ul>
+                <ul>
+                {% if 'name' in request.session %}
+                    Hello {{ request.session.name }} !
+                {% endif %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="{% url 'sensors:logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <a href="{% url 'users:addplant' %}">Add Plant</a><br>
+        <a href="{% url 'users:addVehicle' %}">Add Vehicle</a><br>
+        <a href="{% url 'users:addMember' %}">Add Member</a><br>
+            <!-- <div class="card" style="float: left;margin-left: 450px; " >
+                <center><br>
+                    <p style="text-align: center;color:#295004;font-style:bold;font-family:'Comic Sans MS';font-size:18px;"></p>
+                </center>
+                
+                <center>
+                    <div class="boxed">
+                        <span style="text-align: center;font-style: italic;font-family:'Comic Sans MS';font-size:20px;color:#295004">
+                            
+                        </span>
+                    </div>
+                </center>
+            </div>
+            <div class="card" >
+
+                <span style="text-align: center;font-style:bold;font-family:'Comic Sans MS';font-size:20px;color:#295004"><br>
+                   <center></center><br><br>
+                </span>
+                <center>
+                    
+                </center>
+            </div> -->
+          
+          <br><br><br><br>
+        <div style="font-size: 30px">
+        <center>
+         <div id="time"></div>
+         <div id="date"></div>
+        </center>  
+        </div>
+        <br><br><br>
+    <center>
+        
+    </center>
+    </body>
+        
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="{% static 'sensors/js/Rx.min.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    
+    <style>
+        .boxed {
+          border: 3px solid #4CAF50 ;
+          width:200px;
+          border-radius: 8px;
+          background:#4CAF50  ;
+        }
+        .card {
+          background: #fff;
+          border-radius: 5px;
+          display: inline-block;
+          height: 350px;
+          margin: 1rem;
+          position: relative;
+          width: 300px;
+          color:#EDF7E2;
+          /*margin-left: 250px;*/
+          margin-top: 75px;
+          height: auto;
+          padding-bottom:10px;}
+        ul {
+            list-style-type: square;
+            color:#295004;
+        }
+        button
+        {
+          border: 3px solid #4CAF50  ;
+          width:200px;
+          border-radius: 8px;
+          background:#4CAF50 ;
+        }  
+        select {
+            padding:3px;
+            margin: 0;
+            -webkit-border-radius:4px;
+            -moz-border-radius:4px;
+            border-radius:4px;
+            -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+            -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+            box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+            background: #BEDED9;
+            color:#000200;
+            border:none;
+            outline:none;
+            display: inline-block;
+            -webkit-appearance:none;
+            -moz-appearance:none;
+            appearance:none;
+            cursor:pointer;
+        }
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+        }
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .closebtn:hover {
+            color: black;
+        }
+        div.transbox {
+          margin: 30px;
+          background-color: #ffffff;
+          border: 1px solid black;
+          opacity: 0.6;
+          filter: alpha(opacity=60); /* For IE8 and earlier */
+        }   
+       body {
+        background: #76b852; /* fallback for old browsers */
+        background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+        background: -moz-linear-gradient(right, #76b852, #8DC26F);
+        background: -o-linear-gradient(right, #76b852, #8DC26F);
+        background: linear-gradient(to left, #76b852, #8DC26F);
+        font-family: "Roboto", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;      
+      }
+    </style>
+</html>
+
+
+
+
+<!-- <div id="chart_div_humidity" style="width: 300px; height: 300px;float: left;"></div>
+        <div id="chart_div_temp" style="width: 300px; height: 300px;float: left;"></div>
+        <div id="chart_div_distance" style="width: 300px; height: 300px;float: left;"></div>
+        <div id="chart_div_soil" style="width: 300px; height: 300px;float: left;"></div>
+        <div id="chart_div_pres" style="width: 300px; height: 300px;float: left;"></div> -->
+        <!-- <script type="text/javascript">
+
+        let myObser = Rx.Observable.timer(0, 10000).map(() => fetch(`/sensors/dataupdate/`).then(res => res.json()))
+        myObser.subscribe(x => x.then(data => {
+            if(data.time){
+            document.getElementById('time').innerHTML = data.time
+            document.getElementById('date').innerHTML = data.date
+            }
+            else
+            {
+                document.getElementById('time').innerHTML = "no data"
+            document.getElementById('date').innerHTML = "no data"
+            }
+            google.charts.load('current', {'packages':['gauge']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+                var value1 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['Humidity(%)', data.humidity],
+                ]);
+
+                var options1 = {
+                  width: 300, height: 300,
+                  redFrom: 50, redTo: 65, redColor: 'green',
+                  yellowFrom:40, yellowTo: 75,
+                  greenFrom: 0, greenTo: 100, greenColor: 'red',
+                  minorTicks: 10,
+                  //majorTicks: ['0%','25%','50%','75%','100%'],
+                  animation:{
+        duration: 5000,
+        easing: 'out',
+      },
+                };
+
+                var value2 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['Temp(C)', data.temp],
+                ]);
+
+                var options2 = {
+                 width: 300, height: 300,
+                  redFrom: 30, redTo: 100,
+                  yellowFrom:22, yellowTo: 40,yellowColor:'#b2b2ff', 
+                  greenFrom: 0, greenTo: 22, greenColor:'#4c4cff',
+                  minorTicks: 10,
+                  animation:{
+        duration: 5000,
+        easing: 'out',
+      },
+                };
+
+                var value3 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['W.Level(%)', data.distance],
+                ]);
+
+                var options3 = {
+                 width: 300, height: 300,
+                  greenFrom: (35-12)*100/35, greenTo: (35-0)*100/35,
+                  yellowFrom:(35-25)*100/35, yellowTo: (35-12)*100/35, 
+                  redFrom: (35-35)*100/35, redTo: (35-25)*100/35, 
+                  minorTicks: 10,
+                  animation:{
+        duration: 5000,
+        easing: 'out',
+      },
+                };
+
+                var value4 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['S.Moisture(%)', data.soilmoist],
+                ]);
+
+                var options4 = {
+                   width: 300, height: 300,
+                  redFrom: 30, redTo: 60, redColor:'green',
+                  yellowFrom:20, yellowTo: 80, 
+                  greenFrom:0, greenTo: 100, greenColor:'red',
+                  minorTicks: 10,
+                  animation:{
+        duration: 5000,
+        easing: 'out',
+      },
+                };
+
+                var value5 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['Press.(Pa)', data.pressure],
+                ]);
+
+                var options5 = {
+                 width: 300, height: 300,
+                  redFrom: 98000, redTo: 105000, redColor:'green',
+                  yellowFrom:94000, yellowTo: 110000, 
+                  greenFrom:90000, greenTo: 115000, greenColor:'red',
+                  minorTicks: 10, min: 90000, max: 115000,
+                  animation:{
+        duration: 5000,
+        easing: 'out',
+      },
+                };
+                
+
+                var chart1 = new google.visualization.Gauge(document.getElementById('chart_div_humidity'));
+                chart1.draw(value1, options1);
+
+                var chart2 = new google.visualization.Gauge(document.getElementById('chart_div_temp'));
+                chart2.draw(value2, options2);
+                var chart3 = new google.visualization.Gauge(document.getElementById('chart_div_distance'));
+                
+                chart3.draw(value3, options3);
+
+                var chart4 = new google.visualization.Gauge(document.getElementById('chart_div_soil'));
+                chart4.draw(value4, options4);
+                var chart5 = new google.visualization.Gauge(document.getElementById('chart_div_pres'));
+                chart5.draw(value5, options5);
+
+
+              }
+
+
+        }
+        ))
+    </script> -->
