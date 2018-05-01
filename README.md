@@ -1,2 +1,1 @@
-# plantometer
-# major changes made by tanmay
+Deployed Project With Mobile App API
